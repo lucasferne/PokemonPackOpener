@@ -1,75 +1,18 @@
-# React + TypeScript + Vite
+TCG Pack Opener
+Este projeto é um simulador interativo de abertura de pacotes de cartas colecionáveis de Pokémon, desenvolvido com React e Vite. A aplicação consome dados reais de coleções oficiais através da API TCGdex, permitindo que o usuário selecione diferentes expansões e experimente a mecânica de revelação de cartas com alta fidelidade visual.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Funcionalidades Técnicas
+O projeto foca na experiência do usuário e em animações de estado complexas. A principal característica é o uso do Framer Motion para implementar o conceito de Layout Compartilhado. Quando uma carta é revelada no deck principal, ela não apenas aparece no inventário, mas realiza uma transição fluida de movimento e escala entre os dois containers, mantendo sua identidade visual através da propriedade layoutId.
 
-Currently, two official plugins are available:
+A mecânica de revelação utiliza transformações 3D via CSS, empregando propriedades como preserve-3d e backface-visibility para garantir que a transição entre a frente e o verso da carta ocorra de forma realista. Além disso, o sistema de sombras dinâmicas no deck principal simula a profundidade de um pacote físico, diminuindo visualmente conforme as cartas são removidas da pilha.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Arquitetura e Fluxo
+A aplicação é dividida em componentes modulares. O componente CardButton é versátil, operando em dois modos distintos: interativo com suporte a rotação para o momento da abertura, e estático para exibição otimizada no grid de resultados. O estado global controla o carregamento das coleções, a fila de cartas restantes no pacote atual e a galeria de cartas já visualizadas.
 
-## React Compiler
+Um modal de alta definição também foi implementado para permitir a inspeção detalhada de cada carta após a revelação, utilizando AnimatePresence para gerenciar as transições de entrada e saída do overlay no DOM.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Tecnologias Utilizadas
+O desenvolvimento foi realizado com React e TypeScript, utilizando Vite como ferramenta de build para garantir performance e recarregamento rápido durante o desenvolvimento. A biblioteca Framer Motion foi a escolha para todas as interações animadas, enquanto o gerenciamento de deploy é feito automaticamente para o GitHub Pages através do pacote gh-pages, garantindo a integração contínua do projeto.
 
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Instruções de Instalação
+Para executar o projeto localmente, clone o repositório e utilize o comando npm install para baixar as dependências necessárias. O comando npm run dev inicia o servidor de desenvolvimento. Para gerar a versão de produção e realizar o deploy no ambiente de hospedagem, utilize npm run deploy.
