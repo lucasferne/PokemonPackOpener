@@ -1,0 +1,68 @@
+/* Zona de interação que envolve o card, garantindo que toda a área seja clicável */
+.card-click-zone {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: block;
+}
+
+/* Container interno que permite o efeito 3D (flip) */
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  /* Essencial para que os filhos (.card-face) sejam posicionados em um espaço 3D */
+  transform-style: preserve-3d;
+}
+
+/* Base comum para as duas faces do card (frente e verso) */
+.card-face {
+  position: absolute;
+  inset: 0; /* Atalho para top/right/bottom/left: 0 */
+  width: 100%;
+  height: 100%;
+  /* Esconde a face oposta quando ela estiver de costas para o usuário */
+  backface-visibility: hidden;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+/* Estilização da imagem dentro das faces do card */
+.card-face img {
+  width: 100%;
+  height: 100%;
+  /* 'fill' estica a imagem para preencher todo o container */
+  object-fit: fill;
+}
+
+/* Define a posição inicial do verso do card (já rotacionado em 180 graus) */
+.card-back {
+  transform: rotateY(180deg);
+}
+
+/* Estilo para um card estático (sem flip) usado em sistemas de grid */
+.card-static-grid {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  cursor: zoom-in;
+  /* Suaviza a animação de escala ao passar o mouse */
+  transition: transform 0.2s;
+}
+
+/* Efeito de "zoom" leve ao passar o mouse no card estático */
+.card-static-grid:hover {
+  transform: scale(1.05);
+}
+
+/* Estilo para imagens fixas que não devem ser cortadas nem esticadas distorcidamente */
+.card-img-fixed {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* Mantém a proporção da imagem, cabendo inteira no container */
+  object-fit: contain;
+}
